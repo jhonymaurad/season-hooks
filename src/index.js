@@ -2,22 +2,11 @@ import React, {useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import SeasonDisplay from './SeasonDisplay';
 import Spinner from './spinner';
+import useLocation from './useLocation';
 
 const App = () => {
-    const [lat, setLat] = useState(null);
-    const [errorMessage, setErrorMessage] = useState('');
 
-    //empty arrray as second argument means, run just once
-    useEffect(()=>{
-        window.navigator.geolocation.getCurrentPosition(
-            (position) => {
-                setLat(position.coords.latitude);
-            }, 
-            (err) => {
-                setErrorMessage(err.message );
-            }
-        );
-    }, []);
+    const [lat, errorMessage] = useLocation();
 
     let content;
 
